@@ -44,6 +44,8 @@ create table EMP
  
  select ENAME,0.2*SAL as "HRA" from EMP;
  
+ select instr(ENAME,'ar') from EMP;
+ 
  select DEPTNO,count(*) from emp
  where DEPTNO=10;
  
