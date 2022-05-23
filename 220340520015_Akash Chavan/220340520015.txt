@@ -1,0 +1,96 @@
+use Akash100;
+create table DEPT
+(
+  DEPTNO int,
+  DNAME varchar(15),
+  LOC varchar(10)
+);
+insert into DEPT values
+(10,'ACCOUNTING','NEW YORK'),
+(20,'RESEARCH','DALLAS'),
+(30,'SALES','CHICAGO' ),
+(40,'OPERATIONS','BOSTON'); 
+create table EMP
+(
+ EMPNO int(4),
+ ENAME varchar(10) ,
+ JOB varchar(9) ,   
+ HIREDATE date ,
+ SAL float,
+ COMM   float,
+ DEPTNO   int
+ );
+ insert into EMP values
+ (7839,'KING','MANAGER','1991-11-17',5000,NULL,10),
+ (7698,'BLAKE','CLERK','1981-05-01',2850,NULL,30), 
+ (7782,'CLARK','MANAGER','1981-06-09',2450,NULL,10),
+ (7566,'JONES','CLERK','1981-04-02',2975,NULL,20),
+ (7654,'MARTIN','SALESMAN','1981-09-28',1250, 1400,30),
+ (7499,'ALLEN','SALESMAN','1981-02-20',1600,300,3);
+ 
+ select * from EMP;
+ 
+ select ENAME from EMP
+ where Sal between 2500 and 5000;
+ 
+ select ENAME from emp
+ order by ENAME desc;
+ 
+ select lower(JOB) from EMP;
+ select ENAME,length(ENAME) from EMP;
+ 
+ select DNAME,ENAME from EMP,DEPT
+ where DEPT.DEPTNO=EMP.DEPTNO;
+ 
+ select ENAME,0.2*SAL as "HRA" from EMP;
+ 
+ select DEPTNO,count(*) from emp
+ where DEPTNO=10;
+ 
+ select DEPTNO,count(*) from emp
+ where DEPTNO=20;
+ 
+ select DEPTNO,count(*) from emp
+ where DEPTNO=30;
+
+ 
+ 
+ create table Traingle
+ (
+    side1 int,
+    side2 int,
+    side3 int,
+    Status varchar(15)
+);
+
+delimiter //
+create function FUNC1(x int,y int,z int)
+returns boolean
+deterministic
+begin
+  if x<y+z or y<x+z or z<x+y then
+     return true;
+  else
+    return false;
+ end if;
+ end ; //
+ delimiter ;
+ 
+ delimiter //
+ create procedure Func2()
+ begin
+    if FUNC1(10,20,30) then
+      insert into Traingle values(10,20,30,'Valid');
+	else
+      insert into Traingle values(10,20,30,'Invalid');
+	end if;
+ end ; //
+ delimiter ;
+ 
+ call Func2();
+ select * from Traingle;
+
+ 
+  
+ 
+ 
